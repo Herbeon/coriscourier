@@ -358,23 +358,68 @@ screen main_menu():
     add gui.main_menu_background
 
     ## This empty frame darkens the main menu.
-    frame:
-        style "main_menu_frame"
+    # frame:
+    #     style "main_menu_frame"
 
+    # image button time!
+
+    imagebutton:
+        idle "gui/button/mm/quitun.png"
+        hover "gui/button/mm/qits.png"
+        action Quit(confirm = not main_menu)
+        alt "Quit"
+        focus_mask True 
+
+    imagebutton:
+        idle "gui/button/mm/startun.png"
+        hover "gui/button/mm/starts.png"
+        action Start()
+        alt "Start"
+        focus_mask True 
+
+    imagebutton:
+        idle "gui/button/mm/aboutun.png"
+        hover "gui/button/mm/abts.png"
+        action ShowMenu("about")
+        alt "About"
+        focus_mask True 
+
+    imagebutton:
+        idle "gui/button/mm/loadun.png"
+        hover "gui/button/mm/loads.png"
+        action ShowMenu("load")
+        alt "Load"
+        focus_mask True 
+
+    imagebutton:
+        idle "gui/button/mm/prefun.png"
+        hover "gui/button/mm/prefs.png"
+        action ShowMenu("preferences")
+        alt "Preferences"
+        focus_mask True 
+
+    imagebutton:
+        idle "gui/button/mm/helpun.png"
+        hover "gui/button/mm/helps.png"
+        action ShowMenu("help")
+        alt "Help"
+        focus_mask True 
+        
     ## The use statement includes another screen inside this one. The actual
     ## contents of the main menu are in the navigation screen.
-    use navigation
+    # use navigation
 
-    if gui.show_name:
 
-        vbox:
-            style "main_menu_vbox"
+    # if gui.show_name:
 
-            text "[config.name!t]":
-                style "main_menu_title"
+    #     vbox:
+    #         style "main_menu_vbox"
 
-            text "[config.version]":
-                style "main_menu_version"
+    #         text "[config.name!t]":
+    #             style "main_menu_title"
+
+    #         text "[config.version]":
+    #             style "main_menu_version"
 
 
 style main_menu_frame is empty
