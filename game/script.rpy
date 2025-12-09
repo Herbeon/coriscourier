@@ -193,7 +193,7 @@ init python:
 
 # start defining characters here
 
-define c = Character("CORI",color="c0f533")
+define c = Character("CORI",color="#c0f533")
 define y = Character("THE HUNGRY", color="#fd761f")
 
 label start:
@@ -334,6 +334,10 @@ label hungry_thing:
     scene bg fill orange
     show hungry neutral at topleft, squishysquash
     y "this is a test."
+    y " WHY WON'T MY HACKATIME WORK SAD :pensive"
+    y "oh now it works yay"
+    show hungry hungry at topleft, squishysquash 
+    y "I AM HUNGRY."
 
     
     # "let's try our first gamble."
