@@ -13,6 +13,8 @@ define total_rolls = 0 # total amount of times you've rolled individual dice (if
 define total_rtimes = 0 # total amount of times you've done a roll (no matter your stat, it will add 1 each time)
 # maybe I will add persistence, or maybe not.
 
+# for dialogue
+define self_talking = False
 
 # this set of variables controls the "free", "easy", "medium", "hard", "veryhard", "impossible"
 define free = 1
@@ -56,7 +58,51 @@ define caff = 4 # "cori affection"
 # 7 affection: 0-1 dishes
 
 # this is a list of lists of the possible dishes that the burden may ask cori to pick up, indexes based on caff
+# shorter version due to time constraints
 define dishes = [
+    [ # 0 affection what did you do....these are kinda impossible good luck
+        "meme", "architecture"
+    ],
+    [ # 1 hard to find around (such as needing to infiltrate a museum) or hard to bring to the hungry
+        "graffiti", "sculpture"
+    ],
+    [ # 2.. even more confusing to bring to the hungry? or hard to find around
+        "music composition", "musical performance"
+    ],
+    [ # 3 it's okay but how do you "bring it" to the hungry?????
+        "cinema", "dance"
+    ],
+    [ #4 decently easy to find/make
+        "character design", "fashion design"
+    ],
+    [ # 5 games & fun stuff, pretty popular
+        "visual novel", "comic book"
+    ],
+    [ # 6 these are decently easy to find
+        "photography", "painting"
+    ],
+    [ # 7 nice jobb. these are easy ish to get
+        "drawing", "anything"
+    ]
+]
+define dmeme =[]
+define darchit = []
+define dgraff = []
+define dsculpt = []
+define dcomp = []
+define dperf = []
+define dcine = []
+define ddance = []
+define dchard = []
+define dfash = []
+define dvn = []
+define dcomic = []
+define dphoto = []
+define dpaint = []
+define ddrawing = []
+define danything = []
+
+define disheslong = [
     [ # 0 affection what did you do....these are kinda impossible good luck
         "meme", "conlang", "architecture", "graffiti"
     ],
@@ -122,7 +168,7 @@ transform rotation:
     repeat 1
 
 transform squishysquash:
-    anchor (0.5,0.5)
+    # anchor (0.5,1.0)
     linear 0.4 yzoom(1.01)
     linear 0.4 yzoom(1.0)
     repeat 
@@ -156,9 +202,7 @@ label start:
     # dissolve for cool things
     # better UI too (need to plan that out)
     # better names
-
-    scene bg fill white
-    show cori human test at truecenter, squishysquash
+    # show cori human test at truecenter, squishysquash
     show screen parallaxparticles1 
     # show screen bars
 
@@ -168,10 +212,17 @@ label start:
     # $ p += 1
     # c "lookie!"
 
-    show screen caffection
     # c "ysyy!"
     # $ caff += 2
     # c "yipiiee they like me!"
+    jump choose_pawgt_first
+
+
+label choose_pawgt_first:
+    scene bg fill white
+    show screen parallaxparticles1 
+
+    show screen caffection
 
     show screen choosep
     show screen choosea
@@ -191,15 +242,50 @@ label start:
     show screen showts
     show screen stot
 
-    c "choose your PAWGT by sliding the sliders hooray. click the text box to learn more (this is also buffer for people who accidentally click not the slider)"
+    c "choose your PAWGT by sliding the sliders hooray. click the text box to learn more"
     c "PHYS is for strength-related things."
     c "ACTS determine your motivation to persist."
     c "WORDS influence your ability to speak with others."
     c "GIFTS bring you more ideas and observations."
     c "And TIME allows you to do things fast."
     c "the game is balanced for a total of 20, but you can choose to gamble more or less :)"
+    "click this bubble when you have finished."
+    jump are_you_done
 
+menu are_you_done:
+    "are you done choosing stats?"
 
+    "yes":
+        jump done_choosing_first 
+    "no": 
+        jump oops_I_misclicked_first
+
+label oops_I_misclicked_first:
+    # $ renpy.rollback()
+    scene bg fill white
+
+    show screen choosep
+    show screen choosea
+    show screen choosew
+    show screen chooseg
+    show screen chooset
+
+    show screen showp
+    show screen showps
+    show screen showa
+    show screen showas
+    show screen showw
+    show screen showws
+    show screen showg
+    show screen showgs
+    show screen showt
+    show screen showts
+    show screen stot
+
+    "back to choosing!"
+    jump are_you_done
+
+label done_choosing_first:
     hide screen choosep 
     hide screen choosea
     hide screen choosew 
@@ -241,8 +327,13 @@ label start:
         yalign 0.5 
         rotation 
     pause 
-    ""
 
+    jump hungry_thing
+
+label hungry_thing:
+    scene bg fill orange
+    show hungry neutral at topleft, squishysquash
+    y "this is a test."
 
     
     # "let's try our first gamble."

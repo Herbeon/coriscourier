@@ -304,8 +304,12 @@ screen choice(items):
     style_prefix "choice"
 
     vbox:
+        if self_talking:
+            xpos 0.4
+        else:
+            xpos 0.8
         for i in items:
-            textbutton i.caption action i.action
+            textbutton i.caption action i.action xsize 600
 
 
 style choice_vbox is vbox
@@ -313,8 +317,8 @@ style choice_button is button
 style choice_button_text is button_text
 
 style choice_vbox:
-    xalign 0.5
-    ypos 405
+    xalign 0.9
+    ypos 540
     yanchor 0.5
 
     spacing gui.choice_spacing
@@ -324,7 +328,6 @@ style choice_button is default:
 
 style choice_button_text is default:
     properties gui.text_properties("choice_button")
-
 
 ## Quick Menu screen ###########################################################
 ##
