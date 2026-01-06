@@ -161,6 +161,10 @@ define dizoom = MultipleTransition([
 
 define funswing = Swing(0.5,True,True,background="#c0f533",flatten=False)
 
+transform smallsquish:
+    linear 0.4 yzoom(1.01)
+    linear 0.4 yzoom(1.0)
+
 transform rotation:
     alignaround (.5, .5)
     rotate 0
@@ -332,12 +336,21 @@ label done_choosing_first:
 
 label hungry_thing:
     scene bg fill orange
-    show hungry neutral at topleft, squishysquash
+    show hungry neutral
+    # show hungry neutral at topleft, squishysquash
     y "this is a test."
     y " WHY WON'T MY HACKATIME WORK SAD :pensive"
     y "oh now it works yay"
-    show hungry hungry at topleft, squishysquash 
+    # show hungry hungry at topleft, squishysquash 
+    show hungry hungry
+
     y "I AM HUNGRY."
+    show hungry happy with dissolve
+    y "please give me food."
+    scene bg fill pink
+    with hpunch
+    y "kaboom"
+    
 
     
     # "let's try our first gamble."
@@ -453,3 +466,6 @@ label aff_7:
         y "It is not very hungry :) I won't demand a dish this time!"
         y "don't forget to thank me by continuing to be nice :3"
 
+label chapter_4:
+    # oops I forgot what chapter 4 was for
+    
