@@ -152,6 +152,13 @@ define dishes_cooked = []
 # this is a list: index of number is the adjective describing the thing
 define statjudge = ["completely nonexistent", "horribly lacking", "mildly lacking","below average","average","good","pretty great","perfect","more than perfect"]
 
+# this is a collection of the player's perceived attitude towards certain things based on their responses to dialogue prompts. ranges from 1 to 3, with 1 being no, 3 being yes, 2 being maybe
+define belief_deity = 2 # how much the player appears to believe in deities
+define belief_timetravel = 2 # how much the player appears to believe in time travel
+define belief_altruism = 2 # how much the player appears to believe in altruism in this world
+define belief_art = 2 # how much the player appears to believe in the positive impacts of art
+define belief_future = 2 # how much the player appears to believe in the future
+
 
 # this is a collection of transitions
 
@@ -161,9 +168,20 @@ define dizoom = MultipleTransition([
 
 define funswing = Swing(0.5,True,True,background="#c0f533",flatten=False)
 
-transform smallsquish:
+transform smallsquish(duration = 0.3,*,new_widget=None,old_widget=None):
+    delay duration 
+    xcenter .5
+    ycenter 0.5
+
+    old_widget
+    events False
     linear 0.4 yzoom(1.01)
+
+    # Spin the new displayable.
+    new_widget
+    events True
     linear 0.4 yzoom(1.0)
+
 
 transform rotation:
     alignaround (.5, .5)
@@ -207,7 +225,9 @@ label start:
     # better UI too (need to plan that out)
     # better names
     # show cori human test at truecenter, squishysquash
+    show screen parallaxbutterflies
     show screen parallaxparticles1 
+
     # show screen bars
 
     # c "helo (help this gui is so scuffed ToT how to design boxes)"
@@ -219,12 +239,26 @@ label start:
     # c "ysyy!"
     # $ caff += 2
     # c "yipiiee they like me!"
+
+
+    jump prelude
+
+label prelude:
+    scene bg fill dark
+
+    "somewhere in the world, a butterfly emerges."
+    "it flicks its orange wings,"
+    "and everything is changed."
+
+    hide screen parallaxbutterflies
+
     jump choose_pawgt_first
 
 
 label choose_pawgt_first:
     scene bg fill white
-    show screen parallaxparticles1 
+    with dissolve
+
 
     show screen caffection
 
@@ -324,8 +358,9 @@ label done_choosing_first:
     scene whoahwoaho
     with funswing
     pause 0.2 
-    scene curveyone
+    show curveyone
     with dissolve
+    scene bg fill pink
     show upsidedown:
         xalign 0.5
         yalign 0.5 
@@ -336,16 +371,16 @@ label done_choosing_first:
 
 label hungry_thing:
     scene bg fill orange
-    show hungry neutral
+    show hungry neutral with smallsquish
     # show hungry neutral at topleft, squishysquash
     y "this is a test."
     y " WHY WON'T MY HACKATIME WORK SAD :pensive"
     y "oh now it works yay"
     # show hungry hungry at topleft, squishysquash 
-    show hungry hungry
+    show hungry hungry with smallsquish
 
     y "I AM HUNGRY."
-    show hungry happy with dissolve
+    show hungry happy with smallsquish
     y "please give me food."
     scene bg fill pink
     with hpunch
@@ -469,3 +504,4 @@ label aff_7:
 label chapter_4:
     # oops I forgot what chapter 4 was for
     
+

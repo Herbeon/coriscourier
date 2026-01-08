@@ -1887,3 +1887,6 @@ screen stot:
 
 screen parallaxparticles1:
     add TrackCursor("images/pcls3.png", 20)
+
+screen parallaxbutterflies:
+    add TrackCursor("images/bflies.png", 35)
