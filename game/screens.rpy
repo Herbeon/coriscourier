@@ -26,7 +26,6 @@ init python:
             self.last_st = 0
 
 
-
         def render(self, width, height, st, at):
 
             rv = renpy.Render(width, height)
@@ -42,7 +41,6 @@ init python:
                 self.actual_x = math.floor(self.actual_x + ((self.x - self.actual_x) * speed * (st_change )) * self.paramod)
                 self.actual_y = math.floor(self.actual_y + ((self.y - self.actual_y) * speed * (st_change)) * self.paramod)
 
-
                 if mouse_distance_y <= minimum_speed:
                     mouse_distance_y = minimum_speed
                 elif mouse_distance_y >= maximum_speed:
@@ -51,7 +49,6 @@ init python:
                 cr = renpy.render(self.child, width, height, st, at)
                 cw, ch = cr.get_size()
                 rv.blit(cr, (self.actual_x, self.actual_y))
-
 
 
             renpy.redraw(self, 0)

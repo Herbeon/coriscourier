@@ -158,6 +158,7 @@ define belief_timetravel = 2 # how much the player appears to believe in time tr
 define belief_altruism = 2 # how much the player appears to believe in altruism in this world
 define belief_art = 2 # how much the player appears to believe in the positive impacts of art
 define belief_future = 2 # how much the player appears to believe in the future
+define belief_yummy = 2 # how yummy the player thinks art is
 
 
 # this is a collection of transitions
@@ -298,6 +299,16 @@ menu are_you_done:
     "no": 
         jump oops_I_misclicked_first
 
+label choose_shape:
+    "choose one of five available cori forms"
+    # define statjudge = ["completely nonexistent", "horribly lacking", "mildly lacking","below average","average","good","pretty great","perfect","more than perfect"]
+    # in order PAWGT
+    #  P: feral cori: 8, 6, 2, 4, 7: total of 27
+    # A: short cori: 6, 8, 5, 5, 4: total of 28
+    # W: humanoid cori: 2, 5, 8, 7, 4: total of 26
+    # G: blob cori: 1, 6, 4, 8, 7: total of 26
+    # T: birb cori: 5, 4, 4, 5, 8: total of 26?
+
 label oops_I_misclicked_first:
     # $ renpy.rollback()
     scene bg fill white
@@ -385,6 +396,7 @@ label hungry_thing:
     scene bg fill pink
     with hpunch
     y "kaboom"
+    jump the_reveal
     
 
     
@@ -504,4 +516,10 @@ label aff_7:
 label chapter_4:
     # oops I forgot what chapter 4 was for
     
+label the_reveal:
+    show hungry happy with smallsquish
 
+    y "go forth, cori!"
+    y "my good little courier :3"
+    scene bg fill dark
+    with dissolve 
