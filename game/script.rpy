@@ -253,9 +253,18 @@ label prelude:
 
     hide screen parallaxbutterflies
 
-    jump choose_pawgt_first
+    jump choose_shape_or_pawgt
 
+menu choose_shape_or_pawgt:
+    "do you want to choose a cori form or your own stats?"
+    "coriform":
+        jump choose_shape_first
+    "own stats":
+        jump choose_pawgt_first
 
+label choose_shape_first:
+    "uwu"
+    
 label choose_pawgt_first:
     scene bg fill white
     with dissolve
