@@ -402,6 +402,7 @@ label see_the_hungry:
     c "but stray critters might be dangerous..."
     c "..."
     c "but this one just sounds {color=#fd761f}hungry{/color}."
+    show placeholder stupid cori
     jump saw_the_hungry
 
 menu saw_the_hungry:
@@ -432,8 +433,11 @@ label cori_home_1:
     # cori crouches down
     c "do you have food preferences or-"
     y " "
+    show hungry happy 
     y "this painting!"
+    show hungry hungry
     y "LET ME EAT IT."
+    show placeholder shocked cori
     c "YOU CAN TALK???"
 
 label only_fed_the_hungry:
@@ -476,6 +480,9 @@ menu cori_porch_2:
 label cori_porch_yeet:
     c "hi, little critter."
     # draw scenes
+    scene bg fill lime
+    with hpunch
+    show placeholder yeet cori
     "{color=#c0f533}YEEET{/color}"
     $ global caff, yeeted_hungry
     $ caff -= 2
