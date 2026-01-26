@@ -304,7 +304,7 @@ screen choice(items):
         if self_talking:
             xpos 0.4
         else:
-            xpos 0.8
+            xpos 1.0
         for i in items:
             textbutton i.caption action i.action xsize 600
 
@@ -314,9 +314,9 @@ style choice_button is button
 style choice_button_text is button_text
 
 style choice_vbox:
-    xalign 0.9
+    xalign 1.0
     ypos 540
-    yanchor 0.5
+    yanchor 0.6
 
     spacing gui.choice_spacing
 

@@ -160,6 +160,8 @@ define belief_art = 2 # how much the player appears to believe in the positive i
 define belief_future = 2 # how much the player appears to believe in the future
 define belief_yummy = 2 # how yummy the player thinks art is
 
+# collection of funny variables/stuff that cori did to the hungry or vice versa that the hungry will remember
+define yeeted_hungry = False 
 
 # this is a collection of transitions
 
@@ -227,7 +229,6 @@ label start:
     # better names
     # show cori human test at truecenter, squishysquash
     show screen parallaxbutterflies
-    show screen parallaxparticles1 
 
     # show screen bars
 
@@ -246,12 +247,13 @@ label start:
 
 label prelude:
     scene bg fill dark
-
     "somewhere in the world, a butterfly emerges."
-    "it flicks its orange wings,"
-    "and everything is changed."
-
     hide screen parallaxbutterflies
+    scene belife2a
+    "it flicks its orange wings,"
+    scene bflie2 with dissolve
+    "and everything is changed."
+    show screen parallaxparticles1 
 
     jump choose_shape_or_pawgt
 
@@ -290,13 +292,13 @@ label choose_pawgt_first:
     show screen showts
     show screen stot
 
-    c "choose your PAWGT by sliding the sliders hooray. click the text box to learn more"
-    c "PHYS is for strength-related things."
-    c "ACTS determine your motivation to persist."
-    c "WORDS influence your ability to speak with others."
-    c "GIFTS bring you more ideas and observations."
-    c "And TIME allows you to do things fast."
-    c "the game is balanced for a total of 20, but you can choose to gamble more or less :)"
+    "choose your PAWGT by sliding the sliders hooray. click the text box to learn more"
+    "PHYS is for strength-related things."
+    "ACTS determine your motivation to persist."
+    "WORDS influence your ability to speak with others."
+    "GIFTS bring you more ideas and observations."
+    "And TIME allows you to do things fast."
+    "the game is balanced for a total of 20, but you can choose to gamble more or less :)"
     "click this bubble when you have finished."
     jump are_you_done
 
@@ -385,9 +387,123 @@ label done_choosing_first:
         xalign 0.5
         yalign 0.5 
         rotation 
-    pause 
+    pause 1
 
-    jump hungry_thing
+    jump see_the_hungry
+
+label see_the_hungry:
+    scene bg fill white
+
+    "grrrrrowl"
+    c "WHAT WAS THAT SOUND??"
+    c "ah"
+    c "is that... a little rabbit on the streets?"
+    c "the streets aren't safe for stray critters..."
+    c "but stray critters might be dangerous..."
+    c "..."
+    c "but this one just sounds {color=#fd761f}hungry{/color}."
+    jump saw_the_hungry
+
+menu saw_the_hungry:
+    c "what should I do??"
+    "take the hungry critter back to home":
+        jump took_the_hungry
+    "feed the hungry critter a snack and head home":
+        jump only_fed_the_hungry
+    "pretend you didn't see the hungry critter":
+        jump ignored_the_hungry
+
+label took_the_hungry:
+    c "hi, little critter."
+    $ global caff 
+    $ caff += 2
+    c "the streets aren't safe for stray critters."
+    c "come home with me"
+    "{color=#fd761f}The hungry critter stared back with bright orange eyes,{/color}"
+    "and jumped on cori's head."
+    jump cori_home_1
+
+label cori_home_1:
+    c "this is the first time in a long time that I've had someone else home."
+    c "let me get you something to eat."
+    # scene where the hungry jumps on cori's head (again)
+    c "wha-"
+    # the hungry lands
+    # cori crouches down
+    c "do you have food preferences or-"
+    y " "
+    y "this painting!"
+    y "LET ME EAT IT."
+    c "YOU CAN TALK???"
+
+label only_fed_the_hungry:
+    c "hi, little critter."
+    $ global caff 
+    $ caff -= 1
+    c "would you like a snack?"
+    "{color=#fd761f}The hungry critter stared back with bright orange eyes,{/color}"
+    "took the snack, and walked into the alley."
+    c "..."
+    c "I think I just got robbed."
+    jump cori_porch 
+
+
+label ignored_the_hungry:
+    $ global caff 
+    $ caff -= 3
+    c "nothing can be trusted. not even cute little critters on the street."
+    c "I'll just go home."
+    jump cori_porch 
+
+label cori_porch:
+    c "insert exhale here"
+    c "finally safely home."
+    # some scrolling or kaboom scene? with hpunch yes
+    c "DID THIS CRITTER FOLLOW ME HOME??"
+    c "no, that can't be right. I always make sure nobody follows me home."
+    c "..."
+    jump cori_porch_2
+
+menu cori_porch_2:
+    c "this is unprecedented."
+    "put the critter somewhere further away":
+        jump cori_porch_yeet
+    "go inside without the critter":
+        jump cori_porch_ignored
+    "take the critter inside":
+        jump cori_porch_inside 
+
+label cori_porch_yeet:
+    c "hi, little critter."
+    # draw scenes
+    "{color=#c0f533}YEEET{/color}"
+    $ global caff, yeeted_hungry
+    $ caff -= 2
+    $ yeeted_hungry = True
+    # with hpunch
+    c "bye, little critter!"
+    jump cori_home_2
+
+label cori_porch_ignored:
+    c "hi, little critter."
+    c "I'm just going to ignore you right now."
+    c "bye, little critter."
+    $ global caff
+    $ caff -= 1
+    jump cori_home_2
+
+label cori_home_2:
+    # scene with the hungry RIGHT THERE
+    c "..."
+    c "did I not lock the door?"
+    $ global yeeted_hungry 
+    if yeeted_hungry:
+        c "I THOUGHT I HAD YEETED YOU AWAY."
+    else:
+        c "why won't you just let me ignore you?"
+    c "maybe I am imagining things."
+
+
 
 label hungry_thing:
     scene bg fill orange
