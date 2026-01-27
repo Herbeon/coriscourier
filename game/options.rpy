@@ -48,7 +48,7 @@ define build.name = "coriscourier"
 ## appropriate mixer.
 
 define config.has_sound = False
-define config.has_music = True
+define config.has_music = False
 define config.has_voice = False
 
 
