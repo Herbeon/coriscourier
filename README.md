@@ -1,5 +1,5 @@
 # coriscourier
-yay another storyboard (submitting to midnight tho)
+yay another storyboard
 
 # line
 the starving creature you found on the streets is actually a deity of creation who needs to eat art to survive. (else, it threatens to consume the world).
